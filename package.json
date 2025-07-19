@@ -2,7 +2,8 @@
   "name": "@karameht/a11y-lens",
   "version": "0.0.1-alpha.0",
   "description": "a11y dev panel for react based on axe-core",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "react",
     "accessibility",
@@ -16,5 +17,25 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/karameht/a11y-lens.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "axe-core": "^4.10.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
   }
 }

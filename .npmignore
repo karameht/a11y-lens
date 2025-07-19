@@ -1,0 +1,19 @@
+# exclude dev stuff
+/playground
+/example
+/test
+/*.test.*
+/*.spec.*
+
+# config
+/vite.config.*
+/tsconfig.json
+/jest.config.*
+/.eslintrc.*
+/.prettier*
+/.gitignore
+
+# editor
+*.log
+.DS_Store
+node_modules

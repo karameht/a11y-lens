@@ -8,7 +8,6 @@
 import { useState } from "react";
 import {
   detectFramework,
-  getEnvironmentDebugInfo,
   isDevelopmentEnvironment,
 } from "../../shared/utils/env.utils";
 
@@ -44,7 +43,6 @@ export default function Footer({
   shouldShow,
 }: FooterProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const debugInfo = getEnvironmentDebugInfo();
   const framework = detectFramework();
 
   // Framework-specific tips

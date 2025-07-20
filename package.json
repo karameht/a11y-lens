@@ -1,6 +1,6 @@
 {
   "name": "@karameht/a11y-lens",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2.1",
   "description": "Real-time accessibility checks for React app based on axe-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -48,7 +48,10 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc && cp src/styles.css dist/styles.css",
+    "build:ts": "tsc",
+    "build:css": "postcss src/styles.css -o dist/styles.css",
+    "build:js": "find dist -name '*.js' -type f -exec terser {} --compress --mangle --keep-fnames -o {} \\;",
+    "build": "npm run build:ts && npm run build:css && npm run build:js",
     "clean": "rm -rf dist",
     "ship": "npm run clean && npm run build"
   },
@@ -63,6 +66,10 @@
     "@types/node": "^24.0.15",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "cssnano": "^7.1.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "terser": "^5.43.1",
     "typescript": "^5.8.3"
   },
   "engines": {

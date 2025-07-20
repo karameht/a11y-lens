@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Footer from "./modules/components/Footer/Footer";
 import Header from "./modules/components/Header/Header";
 import LoadingState from "./modules/components/LoadingState/LoadingState";
 import SuccessState from "./modules/components/SuccessState/SuccessState";
@@ -8,7 +9,6 @@ import { useA11yScan } from "./shared/hooks/useA11yScan";
 import type { A11yLensProps } from "./shared/types/component.types";
 import {
   getEnvironment,
-  isDevelopmentEnvironment,
   shouldShowInEnvironment,
 } from "./shared/utils/env.utils";
 import { injectA11yLensStyles } from "./shared/utils/styles.utils";
@@ -17,6 +17,7 @@ export default function A11yLens({
   enabled = true,
   forceShow = false,
   environment,
+  debug = false,
 }: A11yLensProps = {}) {
   const { results, isScanning } = useA11yScan();
 
@@ -60,22 +61,15 @@ export default function A11yLens({
 
       {results.violations.length === 0 && <SuccessState />}
 
-      <details className="a11y-lens__debug">
-        <summary>A11yLens Debug Info</summary>
-        <ul>
-          <li>
-            Environment: <strong>{currentEnv}</strong>
-          </li>
-          <li>Enabled: {enabled.toString()}</li>
-          <li>Force Show: {forceShow.toString()}</li>
-          <li>Environment Prop: {environment || "not provided"}</li>
-          <li>
-            Is Development-like:{" "}
-            {isDevelopmentEnvironment(currentEnv).toString()}
-          </li>
-          <li>Should Show: {shouldShow.toString()}</li>
-        </ul>
-      </details>
+      {debug && (
+        <Footer
+          currentEnv={currentEnv}
+          enabled={enabled}
+          forceShow={forceShow}
+          environment={environment}
+          shouldShow={shouldShow}
+        />
+      )}
     </div>
   );
 }

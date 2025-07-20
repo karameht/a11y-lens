@@ -15,6 +15,8 @@ export interface A11yLensProps {
   forceShow?: boolean;
   /** Custom environment check - if provided, overrides auto-detection */
   environment?: string;
+  /** Show debug info in footer */
+  debug?: boolean;
 }
 
 /**

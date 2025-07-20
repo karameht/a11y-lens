@@ -1,26 +1,24 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# .gitignore - Version control exclusions for A11yLens
 
+# Package manager artifacts
 node_modules
+*.log
+
+# Build outputs
 dist
-dist-ssr
 *.local
 
+# Development workspace
 playground
 
-# Editor directories and files
+# Editor and OS artifacts
+.DS_Store
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+
+# Note: We DO track:
+# - package-lock.json (exact dependency versions)
+# - tsconfig.json (TypeScript configuration)
+# - All source files in src/
+# - Documentation files

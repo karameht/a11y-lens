@@ -1,19 +1,30 @@
-# exclude dev stuff
-/playground
+# .npmignore - Controls which files are excluded from NPM package
+# This keeps the published package clean and minimal for end users
+
+# Development directories - not needed by consumers
+playground
 /example
 /test
+
+# Test files - consumers don't need our tests
 /*.test.*
 /*.spec.*
 
-# config
-/vite.config.*
-/tsconfig.json
-/jest.config.*
-/.eslintrc.*
-/.prettier*
-/.gitignore
+# Build configuration - consumers use pre-built dist/
+vite.config.*
+tsconfig.json
+jest.config.*
+.eslintrc.*
+.prettier*
+.gitignore
 
-# editor
+# Development artifacts
 *.log
 .DS_Store
 node_modules
+
+# Note: We DO include:
+# - dist/ (built files - the actual package)
+# - README.md (documentation)
+# - LICENSE (legal requirement)
+# - package.json (NPM metadata)

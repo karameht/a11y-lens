@@ -1,30 +1,50 @@
 {
   "name": "@karameht/a11y-lens",
   "version": "0.0.1-alpha.0",
-  "description": "a11y dev panel for react based on axe-core",
+  "description": "Visual accessibility panel overlay for real-time a11y checks during development, based on axe-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
   "keywords": [
     "react",
     "accessibility",
     "a11y",
     "axe-core",
     "devtools",
-    "panel"
+    "panel",
+    "overlay",
+    "development"
   ],
-  "author": "karameht",
+  "author": {
+    "name": "karameht",
+    "url": "https://karameht.com"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/karameht/a11y-lens.git"
   },
+  "bugs": {
+    "url": "https://github.com/karameht/a11y-lens/issues"
+  },
+  "homepage": "https://github.com/karameht/a11y-lens#readme",
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "ship": "npm run clean && npm run build"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -34,8 +54,12 @@
     "axe-core": "^4.10.3"
   },
   "devDependencies": {
+    "@types/node": "^24.0.15",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

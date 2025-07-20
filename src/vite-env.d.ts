@@ -5,9 +5,6 @@
  *
  * This file extends TypeScript's knowledge of environment variables
  * available through import.meta.env in Vite-based projects.
- *
- * These definitions enable proper TypeScript support and autocompletion
- * for environment variables used by A11yLens.
  */
 
 interface ImportMetaEnv {
@@ -16,12 +13,13 @@ interface ImportMetaEnv {
   readonly DEV: boolean; // true in development
   readonly PROD: boolean; // true in production
 
-  // Custom environment variables for A11yLens
-  readonly VITE_APP_ENV: string; // Custom environment identifier
-  readonly VITE_ENVIRONMENT: string; // Alternative environment variable
+  // A11yLens specific environment variables
+  readonly VITE_A11Y_LENS_ENV?: string; // A11yLens environment override
+  readonly VITE_APP_ENV?: string; // Custom app environment identifier
+  readonly VITE_ENVIRONMENT?: string; // Alternative environment variable
 
-  // Note: Add new environment variables here as they're introduced
-  // Format: readonly VITE_YOUR_VAR: string;
+  // Astro compatibility (uses Vite under the hood)
+  readonly ASTRO_ENV?: string; // Astro environment variable
 }
 
 /**

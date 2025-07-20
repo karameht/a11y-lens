@@ -5,20 +5,11 @@
  * Shows error/success state based on violations found.
  */
 
-import { useEffect } from "react";
-import { injectStyles } from "../../../shared/utils/styles.utils";
-import { SUMMARY_STYLES } from "./Summary.styles";
-
 interface SummaryProps {
-  /** Number of violations found */
   violationCount: number;
-  /** Number of checks that passed */
   passCount: number;
-  /** Custom violation text (optional) */
   violationText?: string;
-  /** Custom passed text (optional) */
   passedText?: string;
-  /** Show passed count (optional) */
   showPassedCount?: boolean;
 }
 
@@ -29,17 +20,14 @@ export default function Summary({
   passedText,
   showPassedCount = true,
 }: SummaryProps) {
-  useEffect(() => {
-    injectStyles("a11y-lens-summary-styles", SUMMARY_STYLES);
-  }, []);
-
   const isSuccess = violationCount === 0;
   const badgeClass = isSuccess
     ? "a11y-lens__badge--success"
     : "a11y-lens__badge--error";
 
   const displayViolationText =
-    violationText || `${violationCount} issues found`;
+    violationText ||
+    `${violationCount} ${violationCount === 1 ? "issue" : "issues"} found`;
   const displayPassedText = passedText || `✅ ${passCount} passed`;
 
   return (

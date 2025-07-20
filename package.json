@@ -1,7 +1,7 @@
 {
   "name": "@karameht/a11y-lens",
   "version": "0.0.1-alpha.1",
-  "description": "Visual accessibility panel overlay for real-time a11y checks during development, based on axe-core",
+  "description": "Visual accessibility panel overlay for real-time a11y checks during development, based on axe-core. Works with all modern React frameworks.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
@@ -10,7 +10,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.js"
-    }
+    },
+    "./styles.css": "./dist/styles.css"
   },
   "sideEffects": false,
   "keywords": [
@@ -21,7 +22,12 @@
     "devtools",
     "panel",
     "overlay",
-    "development"
+    "development",
+    "vite",
+    "nextjs",
+    "remix",
+    "astro",
+    "framework-agnostic"
   ],
   "author": {
     "name": "karameht",
@@ -42,13 +48,13 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp src/styles.css dist/styles.css",
     "clean": "rm -rf dist",
     "ship": "npm run clean && npm run build"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^17 || ^18 || ^19",
+    "react-dom": "^17 || ^18 || ^19"
   },
   "dependencies": {
     "axe-core": "^4.10.3"

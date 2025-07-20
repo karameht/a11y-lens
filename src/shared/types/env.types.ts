@@ -2,7 +2,7 @@
  * Environment Types
  *
  * TypeScript definitions for environment detection and configuration.
- * Covers development/production environments and related settings.
+ * Supports modern React frameworks: Vite, Next.js, Remix, and Astro.
  */
 
 /**
@@ -28,6 +28,17 @@ export type DevelopmentEnvironment = "development" | "dev" | "local";
 export type ProductionEnvironment = "production" | "prod";
 
 /**
+ * Supported modern React frameworks
+ */
+export type FrameworkType =
+  | "vite" // The new standard for development
+  | "nextjs" // Production apps, full-stack
+  | "remix" // Web standards focused
+  | "astro" // Content sites with React islands
+  | "nodejs" // Generic Node.js
+  | "unknown";
+
+/**
  * Environment detection result
  */
 export interface EnvironmentInfo {
@@ -37,12 +48,16 @@ export interface EnvironmentInfo {
   isDevelopment: boolean;
   /** Whether this is a production-like environment */
   isProduction: boolean;
+  /** Detected framework */
+  framework: FrameworkType;
   /** Source of environment detection */
   source:
     | "prop"
-    | "vite_app_env"
-    | "vite_environment"
-    | "vite_mode"
+    | "a11y_lens_specific"
+    | "app_env"
+    | "framework_mode"
+    | "node_env"
+    | "framework_flags"
     | "fallback";
   /** Raw value that was detected */
   rawValue: string;
@@ -63,8 +78,38 @@ export interface EnvironmentConfig {
 }
 
 /**
- * Vite environment variables interface
- * Extends the ImportMetaEnv for better typing
+ * Universal environment variables interface
+ * Covers all modern React frameworks
+ */
+export interface UniversalEnvVars {
+  // Vite (the new development standard)
+  MODE?: string;
+  DEV?: boolean;
+  PROD?: boolean;
+  VITE_APP_ENV?: string;
+  VITE_ENVIRONMENT?: string;
+  VITE_A11Y_LENS_ENV?: string;
+
+  // Next.js (production apps, full-stack)
+  NODE_ENV?: string;
+  NEXT_PUBLIC_APP_ENV?: string;
+  NEXT_PUBLIC_ENVIRONMENT?: string;
+  NEXT_PUBLIC_A11Y_LENS_ENV?: string;
+  NEXT_PUBLIC_VERCEL_URL?: string;
+
+  // Remix (web standards focused)
+  REMIX_DEV_HTTP_ORIGIN?: string;
+
+  // Astro (content sites with React islands)
+  ASTRO_ENV?: string;
+
+  // Custom/Browser
+  [key: string]: string | boolean | undefined;
+}
+
+/**
+ * Legacy Vite environment variables interface
+ * @deprecated Use UniversalEnvVars instead
  */
 export interface A11yLensViteEnv {
   /** Standard Vite mode */

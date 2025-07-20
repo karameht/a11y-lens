@@ -1,14 +1,12 @@
 /**
- * Footer Component
- *
- * Displays debug information for the A11yLens accessibility panel.
- * Only shown when debug prop is enabled.
+ * Enhanced Footer Component with Modern Framework Debug
  */
 
-import { useEffect } from "react";
-import { isDevelopmentEnvironment } from "../../../shared/utils/env.utils";
-import { injectStyles } from "../../../shared/utils/styles.utils";
-import { FOOTER_STYLES } from "./Footer.styles";
+import {
+  detectFramework,
+  getEnvironmentDebugInfo,
+  isDevelopmentEnvironment,
+} from "../../../shared/utils/env.utils";
 
 interface FooterProps {
   currentEnv: string;
@@ -25,27 +23,68 @@ export default function Footer({
   environment,
   shouldShow,
 }: FooterProps) {
-  useEffect(() => {
-    injectStyles("a11y-lens-footer-styles", FOOTER_STYLES);
-  }, []);
+  const debugInfo = getEnvironmentDebugInfo();
+  const framework = detectFramework();
+
+  // Framework-specific tips
+  const getFrameworkTip = (fw: string) => {
+    switch (fw) {
+      case "vite":
+        return "Set VITE_A11Y_LENS_ENV=development in .env";
+      case "nextjs":
+        return "Set NEXT_PUBLIC_A11Y_LENS_ENV=development in .env.local";
+      case "remix":
+        return "A11yLens uses NODE_ENV for environment detection";
+      case "astro":
+        return "Set ASTRO_ENV=development or use Vite env vars";
+      default:
+        return "Unknown framework - using fallback detection";
+    }
+  };
 
   return (
     <footer className="a11y-lens__footer">
       <details className="a11y-lens__debug">
-        <summary>Debug Info</summary>
+        <summary>A11yLens Debug Info</summary>
         <ul>
           <li>
-            Environment: <strong>{currentEnv}</strong>
+            <strong>Environment:</strong> {currentEnv}
           </li>
-          <li>Enabled: {enabled.toString()}</li>
-          <li>Force Show: {forceShow.toString()}</li>
-          <li>Environment Prop: {environment || "not provided"}</li>
           <li>
-            Is Development-like:{" "}
+            <strong>Framework:</strong> {framework}{" "}
+            {framework !== "unknown" && "✅"}
+          </li>
+          <li>
+            <strong>Tip:</strong> {getFrameworkTip(framework)}
+          </li>
+          <li>
+            <strong>Enabled:</strong> {enabled.toString()}
+          </li>
+          <li>
+            <strong>Force Show:</strong> {forceShow.toString()}
+          </li>
+          <li>
+            <strong>Environment Prop:</strong> {environment || "not provided"}
+          </li>
+          <li>
+            <strong>Is Development-like:</strong>{" "}
             {isDevelopmentEnvironment(currentEnv).toString()}
           </li>
-          <li>Should Show: {shouldShow.toString()}</li>
+          <li>
+            <strong>Should Show:</strong> {shouldShow.toString()}
+          </li>
+          <li>
+            <strong>Available Env Vars:</strong>{" "}
+            {debugInfo.availableVars.join(", ") || "none"}
+          </li>
         </ul>
+
+        <details className="a11y-lens__debug-raw">
+          <summary>Raw Environment Data</summary>
+          <pre className="a11y-lens__debug-pre">
+            {JSON.stringify(debugInfo.rawEnv, null, 2)}
+          </pre>
+        </details>
       </details>
     </footer>
   );

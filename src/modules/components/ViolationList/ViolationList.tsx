@@ -5,11 +5,8 @@
  * Shows title, scrollable list of violations, and "more items" indicator.
  */
 
-import { useEffect } from "react";
 import type { AxeViolation } from "../../../shared/types/axe.types";
-import { injectStyles } from "../../../shared/utils/styles.utils";
 import ViolationItem from "./ViolationItem/ViolationItem";
-import { VIOLATION_LIST_STYLES } from "./ViolationList.styles";
 
 interface ViolationListProps {
   /** Array of violations to display */
@@ -28,9 +25,7 @@ export default function ViolationList({
   title = "Issues Found:",
   showDetails = true,
 }: ViolationListProps) {
-  useEffect(() => {
-    injectStyles("a11y-lens-violation-list-styles", VIOLATION_LIST_STYLES);
-  }, []);
+  // No separate CSS injection needed - using main theme
 
   if (violations.length === 0) {
     return null;

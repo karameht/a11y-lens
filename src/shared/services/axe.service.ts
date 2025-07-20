@@ -155,7 +155,7 @@ export const runConfiguredScan = async (
 };
 
 /**
- * Quick scan helper - just runs a basic scan
+ * Quick scan helper
  * Alias for runAccessibilityScan for convenience
  */
 export const quickScan = runAccessibilityScan;

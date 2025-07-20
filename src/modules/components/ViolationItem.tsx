@@ -5,8 +5,8 @@
  * description, help text, affected element count, and help link.
  */
 
-import type { AxeViolation } from "../../../../shared/types/axe.types";
-import { getImpactClass } from "../../../../shared/utils/impact.utils";
+import type { AxeViolation } from "../../shared/types/axe.types";
+import { getImpactClass } from "../../shared/utils/impact.utils";
 
 interface ViolationItemProps {
   /** The violation data from axe-core */

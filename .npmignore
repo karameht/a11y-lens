@@ -17,6 +17,7 @@ jest.config.*
 .eslintrc.*
 .prettier*
 .gitignore
+postcss.config.*
 
 # Development artifacts
 *.log

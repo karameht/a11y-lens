@@ -5,13 +5,13 @@
  * Shows title, scrollable list of violations, and "more items" indicator.
  */
 
-import type { AxeViolation } from "../../../shared/types/axe.types";
-import ViolationItem from "./ViolationItem/ViolationItem";
+import type { AxeViolation } from "../../shared/types/axe.types";
+import ViolationItem from "./ViolationItem";
 
 interface ViolationListProps {
   /** Array of violations to display */
   violations: AxeViolation[];
-  /** Maximum number of violations to show */
+  /** Maximum number of violations to show - set to 0 or undefined to show all */
   maxVisible?: number;
   /** Custom title for the violations section */
   title?: string;
@@ -21,19 +21,19 @@ interface ViolationListProps {
 
 export default function ViolationList({
   violations,
-  maxVisible = 3,
+  maxVisible = 0, // CHANGED: Default to 0 = show all
   title = "Issues Found:",
   showDetails = true,
 }: ViolationListProps) {
-  // No separate CSS injection needed - using main theme
-
   if (violations.length === 0) {
     return null;
   }
 
-  const visibleViolations = violations.slice(0, maxVisible);
-  const remainingCount = violations.length - maxVisible;
-  const hasMoreItems = remainingCount > 0;
+  // If maxVisible is 0 or undefined, show all violations
+  const shouldLimit = maxVisible && maxVisible > 0;
+  const visibleViolations = shouldLimit
+    ? violations.slice(0, maxVisible)
+    : violations;
 
   return (
     <div className="a11y-lens__violations">
@@ -48,12 +48,6 @@ export default function ViolationList({
           />
         ))}
       </div>
-
-      {hasMoreItems && (
-        <p className="a11y-lens__more">
-          +{remainingCount} more issue{remainingCount !== 1 ? "s" : ""}...
-        </p>
-      )}
     </div>
   );
 }

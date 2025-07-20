@@ -5,11 +5,8 @@
  * description, help text, affected element count, and help link.
  */
 
-import { useEffect } from "react";
 import type { AxeViolation } from "../../../../shared/types/axe.types";
 import { getImpactClass } from "../../../../shared/utils/impact.utils";
-import { injectStyles } from "../../../../shared/utils/styles.utils";
-import { VIOLATION_ITEM_STYLES } from "./ViolationItem.styles";
 
 interface ViolationItemProps {
   /** The violation data from axe-core */
@@ -25,9 +22,7 @@ export default function ViolationItem({
   showDetails = true,
   showHelpLink = true,
 }: ViolationItemProps) {
-  useEffect(() => {
-    injectStyles("a11y-lens-violation-item-styles", VIOLATION_ITEM_STYLES);
-  }, []);
+  // No separate CSS injection needed - using main theme
 
   const elementCount = violation.nodes.length;
   const elementText = elementCount === 1 ? "element" : "elements";

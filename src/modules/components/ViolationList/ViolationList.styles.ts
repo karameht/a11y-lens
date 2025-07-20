@@ -18,7 +18,6 @@ export const VIOLATION_LIST_STYLES = `
   }
 
   .a11y-lens__violations-list {
-    max-height: 8rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;

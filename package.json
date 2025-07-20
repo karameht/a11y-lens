@@ -1,6 +1,6 @@
 {
   "name": "@karameht/a11y-lens",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "Visual accessibility panel overlay for real-time a11y checks during development, based on axe-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

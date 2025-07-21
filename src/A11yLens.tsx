@@ -1,17 +1,15 @@
 import { useState } from "react";
-import Footer from "./modules/components/Footer";
-import Header from "./modules/components/Header";
-import LoadingState from "./modules/components/LoadingState";
-import PassedList from "./modules/components/PassedList";
-import SuccessState from "./modules/components/SuccessState";
-import Summary from "./modules/components/Summary";
-import ViolationList from "./modules/components/ViolationList";
+import Footer from "./modules/components/layout/Footer";
+import Header from "./modules/components/layout/Header";
+import Summary from "./modules/components/layout/Summary";
+import PassedList from "./modules/components/passed/PassedList";
+import LoadingState from "./modules/components/states/LoadingState";
+import SuccessState from "./modules/components/states/SuccessState";
+import ViolationList from "./modules/components/violation/ViolationList";
 import { useA11yScan } from "./shared/hooks/useA11yScan";
 import type { A11yLensProps } from "./shared/types/component.types";
 import {
-  detectFramework,
   getEnvironment,
-  getEnvironmentDebugInfo,
   shouldShowInEnvironment,
 } from "./shared/utils/env.utils";
 import "./styles.css";
@@ -25,22 +23,13 @@ export default function A11yLens({
   debug = false,
 }: A11yLensProps = {}) {
   const { results, isScanning, runScan } = useA11yScan();
-  // START MINIMIZED by default
   const [isMinimized, setIsMinimized] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType>("issues");
 
   const currentEnv = getEnvironment(environment);
   const shouldShow = shouldShowInEnvironment(enabled, currentEnv, forceShow);
-  const framework = detectFramework();
 
-  // Enhanced logging with modern framework detection
   if (!shouldShow) {
-    const debugInfo = getEnvironmentDebugInfo();
-
-    console.log(
-      `A11yLens: Disabled in ${currentEnv} mode (${framework}). Use forceShow=true to override or set environment to development/staging.`,
-      debug ? debugInfo : ""
-    );
     return null;
   }
 
@@ -67,7 +56,6 @@ export default function A11yLens({
 
       {!isMinimized && (
         <div className="a11y-lens__content">
-          {/* Show loading state only if scanning or no results yet */}
           {!results || isScanning ? (
             <LoadingState isScanning={isScanning} currentEnv={currentEnv} />
           ) : (

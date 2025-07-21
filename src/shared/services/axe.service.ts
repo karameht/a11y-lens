@@ -67,7 +67,6 @@ export const handleScanError = (
   retryDelay: number = 100
 ): NodeJS.Timeout | null => {
   if (isScanAlreadyRunning(error)) {
-    console.log("A11yLens: Axe scan skipped - already running");
     return setTimeout(retryFn, retryDelay);
   } else {
     const errorMessage = error instanceof Error ? error.message : String(error);

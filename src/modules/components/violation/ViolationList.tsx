@@ -5,7 +5,7 @@
  * Shows title, scrollable list of violations, and "more items" indicator.
  */
 
-import type { AxeViolation } from "../../shared/types/axe.types";
+import type { AxeViolation } from "../../../shared/types/axe.types";
 import ViolationItem from "./ViolationItem";
 
 interface ViolationListProps {

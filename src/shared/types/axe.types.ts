@@ -164,3 +164,15 @@ export interface SimplifiedScanResults {
   /** When scan was completed */
   timestamp: Date;
 }
+
+/**
+ * Highlight actions for DOM elements
+ */
+export interface ElementHighlight {
+  /** CSS selector for the element */
+  selector: string;
+  /** Whether element can be highlighted */
+  isHighlightable: boolean;
+  /** Duration of highlight effect */
+  duration?: number;
+}

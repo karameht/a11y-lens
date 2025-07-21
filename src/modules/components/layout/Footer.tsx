@@ -9,7 +9,7 @@ import { useState } from "react";
 import {
   detectFramework,
   isDevelopmentEnvironment,
-} from "../../shared/utils/env.utils";
+} from "../../../shared/utils/env.utils";
 
 interface FooterProps {
   currentEnv: string;

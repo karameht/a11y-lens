@@ -5,7 +5,7 @@
  * Uses same style as ViolationList but with green accent and category tags.
  */
 
-import type { AxePass } from "../../shared/types/axe.types";
+import type { AxePass } from "../../../shared/types/axe.types";
 
 interface PassedListProps {
   /** Array of passed checks to display */

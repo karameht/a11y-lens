@@ -789,6 +789,218 @@
 }
 
 /* ========================================
+   ELEMENT LOCATION STYLES
+======================================== */
+
+/**
+ * Container for element location information
+ * Shows where accessibility issues are located in the DOM
+ */
+.a11y-lens__element-location {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--a11y-bg-primary);
+  border: 1px solid var(--a11y-border);
+  border-radius: var(--a11y-radius);
+}
+
+/**
+ * Element information section (left side)
+ */
+.a11y-lens__element-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.a11y-lens__element-path,
+.a11y-lens__element-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/**
+ * Labels for element information
+ */
+.a11y-lens__element-label {
+  font-size: 11px;
+  color: var(--a11y-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  min-width: 60px;
+  line-height: 1.3;
+}
+
+/**
+ * CSS Selector display
+ */
+.a11y-lens__element-selector {
+  font-family: var(--a11y-font-mono);
+  font-size: 11px;
+  color: var(--a11y-accent);
+  background: var(--a11y-bg-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--a11y-border);
+  word-break: break-all;
+  line-height: 1.3;
+  flex: 1;
+}
+
+/**
+ * Element tag preview
+ */
+.a11y-lens__element-tag {
+  font-family: var(--a11y-font-mono);
+  font-size: 11px;
+  color: var(--a11y-text-secondary);
+  background: var(--a11y-bg-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--a11y-border);
+  line-height: 1.3;
+  flex: 1;
+}
+
+/**
+ * Action buttons container (bottom section)
+ */
+.a11y-lens__action-buttons {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--a11y-border);
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/**
+ * Action buttons (Find element & Read docs)
+ */
+.a11y-lens__action-button {
+  background: var(--a11y-bg-secondary);
+  border: 1px solid var(--a11y-border);
+  color: var(--a11y-text-secondary);
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--a11y-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  flex: 1;
+  justify-content: center;
+}
+
+.a11y-lens__action-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.a11y-lens__action-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/**
+ * Find element button (left)
+ */
+.a11y-lens__action-button--find:hover:not(:disabled) {
+  background: var(--a11y-accent);
+  color: var(--a11y-bg-primary);
+  border-color: var(--a11y-accent);
+  box-shadow: 0 0 15px var(--a11y-accent-glow);
+}
+
+.a11y-lens__action-button--find:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--a11y-bg-secondary);
+  border-color: var(--a11y-border);
+  color: var(--a11y-text-muted);
+}
+
+/**
+ * Read docs button (right)
+ */
+.a11y-lens__action-button--docs:hover {
+  background: var(--a11y-bg-hover);
+  border-color: var(--a11y-accent);
+  color: var(--a11y-accent);
+  box-shadow: 0 0 15px var(--a11y-accent-glow);
+}
+
+/**
+ * Button content
+ */
+.a11y-lens__action-icon {
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.a11y-lens__action-button:hover .a11y-lens__action-icon {
+  opacity: 1;
+}
+
+.a11y-lens__action-text {
+  white-space: nowrap;
+}
+
+/**
+ * Special styling for violation context
+ */
+.a11y-lens__violation .a11y-lens__element-selector {
+  color: var(--a11y-error);
+  border-color: var(--a11y-error);
+}
+
+.a11y-lens__violation .a11y-lens__action-button--find:hover:not(:disabled) {
+  background: var(--a11y-error);
+  border-color: var(--a11y-error);
+  box-shadow: 0 0 15px var(--a11y-error-bg);
+}
+
+.a11y-lens__violation .a11y-lens__action-button--docs:hover {
+  border-color: var(--a11y-error);
+  color: var(--a11y-error);
+  box-shadow: 0 0 15px var(--a11y-error-bg);
+}
+
+/**
+ * Responsive design for mobile
+ */
+@media (max-width: 768px) {
+  .a11y-lens__element-path,
+  .a11y-lens__element-preview {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .a11y-lens__element-label {
+    min-width: auto;
+  }
+
+  .a11y-lens__action-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .a11y-lens__action-button {
+    flex: none;
+    width: 100%;
+  }
+}
+
+/* ========================================
    ANIMATIONS
 ======================================== */
 

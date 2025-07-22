@@ -1,18 +1,71 @@
-# 🔍 A11yLens Documentation
+# 🔍 A11yLens
 
 > Real-time accessibility checking for React apps based on axe-core.
 
-A11yLens is a developer tool that brings accessibility testing directly into your development workflow. No more switching tabs, no more browser extensions - just drop it into your React app and get instant feedback on accessibility issues.
+![Beta Status](https://img.shields.io/badge/status-beta-orange?style=flat-square) ![NPM Version](https://img.shields.io/npm/v/@karameht/a11y-lens?style=flat-square&color=blue) ![License](https://img.shields.io/npm/l/@karameht/a11y-lens?style=flat-square&color=blue) ![Downloads](https://img.shields.io/npm/dm/@karameht/a11y-lens?style=flat-square&color=green)
 
-## 📦 Installation
+> Supported Frameworks
+
+![React Support](https://img.shields.io/badge/react-17%20|%2018%20|%2019-61dafb?style=flat-square&logo=react) ![Vite](https://img.shields.io/badge/vite-ready-646CFF?style=flat-square&logo=vite&logoColor=white) ![Next.js](https://img.shields.io/badge/nextjs-ready-000000?style=flat-square&logo=nextdotjs&logoColor=white) ![Remix](https://img.shields.io/badge/remix-ready-000000?style=flat-square&logo=remix&logoColor=white) ![Astro](https://img.shields.io/badge/astro-ready-BC52EE?style=flat-square&logo=astro&logoColor=white)
+
+A11yLens is a developer tool that brings accessibility testing directly into your development workflow. No more switching tabs, no more browser extensions - just drop it into your React app and get instant feedback on accessibility issues on UI.
+
+---
+
+## 📖 Table of Contents
+
+- [Beta Notice](#️-beta-notice)
+- [Work in Progress](#-work-in-progress)
+- [Screenshots](#-screenshots)
+- [Quick Install](#-quick-install)
+- [Configuration](#️-configuration)
+- [Framework Support](#-framework-support)
+- [User Interface](#-user-interface)
+- [Advanced Usage](#-advanced-usage)
+- [Troubleshooting](#️-troubleshooting)
+- [Understanding Results](#-understanding-results)
+- [Best Practices](#-best-practices)
+- [Examples](#-examples)
+- [Security & Privacy](#-security--privacy)
+- [Contributing](#-contributing)
+- [Issues & Response Time](#-issues--response-time)
+- [License](#-license)
+- [Credits](#-credits)
+
+---
+
+## 📸 Screenshots
+
+> **Coming Soon!** Screenshots showcasing A11yLens in action will be added with or after the V1 release.
+
+![Coming Soon](https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif)
+
+---
+
+## ⚠️ Beta Notice
+
+A11yLens is currently in **beta**. While it's functional and ready for development use, expect some rough edges. We're actively working on improvements and welcome your feedback!
+
+---
+
+### 🚧 Work in Progress
+
+I'm actively working on making A11yLens even better:
+
+- **[a11y.karameht.com](https://a11y.karameht.com)** - Dedicated website with full documentation (in development)
+- **[lens.karameht.com](https://lens.karameht.com)** - Interactive demo and playground (in development)
+- **Enhanced features** - More customization options and advanced functionality
+- **Professional branding** - Creating a visual identity worthy of an axe-core based tool
+
+These things take time to get right, so please bear with me as I craft something that truly serves the accessibility community!
+
+---
+
+## 📦 Quick Install
 
 ```bash
 npm install @karameht/a11y-lens
 ```
-
-## 🚀 Quick Start
-
-### Basic Setup
 
 ```tsx
 import { A11yLens } from "@karameht/a11y-lens";
@@ -22,22 +75,15 @@ function App() {
   return (
     <div>
       {/* Your app */}
-      <h1>My App</h1>
-      <button>Click me</button>
-
-      {/* A11yLens panel */}
       <A11yLens />
     </div>
   );
 }
 ```
 
-That's it! A11yLens will automatically:
+**That's it!** 🎉 A11yLens will auto-detect your environment and show up in development mode only.
 
-- ✅ Detect your environment (development/production)
-- ✅ Run accessibility scans using axe-core
-- ✅ Show results in a floating panel
-- ✅ Hide itself in production builds
+---
 
 ## 🎛️ Configuration
 
@@ -75,9 +121,18 @@ interface A11yLensProps {
 <A11yLens environment="staging" />
 ```
 
+---
+
 ## 🌍 Framework Support
 
 A11yLens works seamlessly with all modern React frameworks:
+
+### React
+
+```tsx
+// Works with any React setup
+<A11yLens />
+```
 
 ### Vite
 
@@ -109,6 +164,8 @@ ASTRO_ENV=development
 VITE_A11Y_LENS_ENV=development
 ```
 
+---
+
 ## 🎨 User Interface
 
 ### Panel States
@@ -121,19 +178,27 @@ A11yLens has three main states:
 
 ### Tabs
 
-- **Issues Tab** - Shows accessibility violations
+- **Issues Tab**
+  - Shows accessibility violations
   - Red badge when violations found
+- **Passed Tab**
+  - Shows successful accessibility checks
   - Green badge when no issues
-- **Passed Tab** - Shows successful accessibility checks
-  - Always green badge
 
 ### Features
 
-- **Auto-scan** - Runs automatically when component mounts
-- **Manual scan** - Click "Scan" button to re-run
-- **Element highlighting** - Click "Find element" to highlight DOM elements
-- **Documentation links** - Direct links to axe-core docs
-- **Debug panel** - Environment and framework information
+- **Auto-scan**
+  - Runs automatically when component mounts
+- **Manual scan**
+  - Click "Scan" button to re-run
+- **Element highlighting**
+  - Click "Find element" to highlight DOM elements
+- **Documentation links**
+  - Direct links to axe-core docs
+- **Debug panel**
+  - Environment and framework information
+
+---
 
 ## 🔧 Advanced Usage
 
@@ -188,6 +253,8 @@ function MyComponent() {
 }
 ```
 
+---
+
 ## 🛠️ Troubleshooting
 
 ### A11yLens not showing?
@@ -197,8 +264,6 @@ function MyComponent() {
    ```tsx
    <A11yLens debug={true} />
    ```
-
-   Open the debug panel to see detected environment.
 
 2. **Force show for testing:**
 
@@ -226,6 +291,8 @@ function MyComponent() {
 - **"already running"** - Axe-core scan already in progress (auto-retries)
 - **"Element not found"** - DOM element was removed/changed
 - **"Cannot highlight"** - Element is not visually highlightable (html, head, etc.)
+
+---
 
 ## 📊 Understanding Results
 
@@ -260,44 +327,17 @@ The "Passed" tab shows:
 - **Description** - What was tested
 - **Documentation link** - Learn more about the check
 
-## 🏗️ Architecture
-
-### Components Structure
-
-```text
-A11yLens/
-├── A11yLens.tsx          # Main component
-├── modules/
-│   └── components/
-│       ├── layout/       # Header, Footer, Summary
-│       ├── violation/    # ViolationList, ViolationItem
-│       ├── passed/       # PassedList
-│       ├── states/       # LoadingState, SuccessState
-│       └── common/       # ActionButtons, Icons, etc.
-├── shared/
-│   ├── hooks/           # useA11yScan
-│   ├── services/        # axe.service
-│   ├── utils/           # env, dom, impact utils
-│   └── types/           # TypeScript definitions
-└── styles.css          # Complete CSS
-```
-
-### Service Layer
-
-- **axe.service.ts** - Handles axe-core integration, retries, errors
-- **useA11yScan.ts** - React hook for scan lifecycle management
-- **dom.utils.ts** - DOM manipulation and element highlighting
-- **env.utils.ts** - Framework-agnostic environment detection
+---
 
 ## 🎯 Best Practices
 
 ### Development Workflow
 
-1. **Install A11yLens** early in development
-2. **Keep it always visible** during development
+1. **Install A11yLens** - early in development
+2. **Keep it always visible** - during development
 3. **Fix violations immediately** - don't let them accumulate
-4. **Use element highlighting** to quickly locate issues
-5. **Read the documentation** links for proper fixes
+4. **Use element highlighting** - to quickly locate issues
+5. **Read the documentation** - links for proper fixes
 
 ### Performance Tips
 
@@ -314,6 +354,8 @@ Focus on violations in this order:
 2. 🟠 **Serious** - Fix before next release
 3. 🟡 **Moderate** - Fix in current sprint
 4. 🔵 **Minor** - Fix when possible
+
+---
 
 ## 📝 Examples
 
@@ -349,7 +391,7 @@ function AccessibilityDashboard() {
 
       {criticalIssues.length > 0 && (
         <div style={{ color: "red" }}>
-          ⚠️ {criticalIssues.length} critical issues found!
+          {criticalIssues.length} critical issues found!
         </div>
       )}
     </div>
@@ -375,6 +417,8 @@ function App() {
 }
 ```
 
+---
+
 ## 🔒 Security & Privacy
 
 - **No data collection** - Everything runs locally
@@ -382,6 +426,8 @@ function App() {
 - **No tracking** - No analytics or telemetry
 - **Open source** - Full transparency
 - **Production safe** - Auto-hides in production builds
+
+---
 
 ## 🤝 Contributing
 
@@ -391,17 +437,36 @@ A11yLens is built with modern React patterns and TypeScript. The codebase is des
 - **Extensibility** - Easy to add new features
 - **Type safety** - Full TypeScript coverage
 - **Performance** - Optimized for development workflow
-- **Accessibility** - Eating our own dog food
+- **Accessibility** - Eating my own dog food
+
+---
+
+### 📬 Issues & Response Time
+
+I'm committed to making A11yLens better, but please be patient with response times. As a solo developer, I sometimes have:
+
+- **Work commitments** - that limit my availability
+- **Vacation time** - where I'm completely offline
+- **Other projects** - that need attention
+- **Private life** - that´s more than just talking with the rubber duck 😂
+
+If you open an issue and don't hear back immediately, don't worry! Check my [GitHub profile](https://github.com/karameht) for current status or recent activity. I **will** get back to you, just might take a few days or weeks depending on my schedule.
+
+**Pro tip:** Well-detailed issues with clear reproduction steps get prioritized! 🚀
+
+---
 
 ## 📄 License
 
 MIT License - see LICENSE file for details.
 
+---
+
 ## 🙏 Credits
 
-- **axe-core** - The accessibility testing engine that powers A11yLens
-- **Deque Systems** - For building the best accessibility testing tools on the planet
-- **React community** - For the patterns and practices that make this possible
+- **[axe-core](https://github.com/dequelabs/axe-core)** - The accessibility testing engine that powers A11yLens
+- **[Deque Systems](https://www.deque.com/)** - For building the best accessibility testing tools on the planet
+- **[React community](https://react.dev/)** - For the patterns and practices that make this possible
 
 ---
 
